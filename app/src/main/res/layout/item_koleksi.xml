@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -31,14 +30,12 @@
                 android:text="Jumlah Barang"
                 android:textSize="14sp"/>
         </LinearLayout>
-
         <Button
             android:id="@+id/tvUpdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Ubah"
             android:textSize="14sp"/>
-
         <Button
             android:id="@+id/tvDelete"
             android:layout_width="wrap_content"
@@ -46,12 +43,9 @@
             android:text="Hapus"
             android:textSize="14sp"/>
     </LinearLayout>
-
     <View
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
         android:layout_marginVertical="8dp"
         android:background="#000000"/>
-
-
 </LinearLayout>

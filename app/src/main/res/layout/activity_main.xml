@@ -6,14 +6,12 @@
     android:layout_height="match_parent"
     android:layout_margin="8dp"
     tools:context=".MainActivity">
-
     <LinearLayout
         android:id="@+id/lnrHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:orientation="vertical">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -31,7 +29,6 @@
                     android:text="Username"
                     android:textSize="18sp"
                     android:textStyle="bold"/>
-
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -46,7 +43,6 @@
                 android:textSize="18sp"
                 android:textStyle="bold"/>
         </LinearLayout>
-
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -55,9 +51,7 @@
             android:text="Daftar koleksi saya"
             android:textSize="18sp"
             android:textStyle="bold"/>
-
     </LinearLayout>
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvItem"
         android:layout_below="@+id/lnrHeader"
@@ -66,7 +60,6 @@
         android:layout_height="wrap_content"
         android:layout_marginVertical="8dp"
         tools:listitem="@layout/item_koleksi"/>
-
     <Button
         android:id="@+id/btnCreate"
         android:layout_width="match_parent"
@@ -75,5 +68,4 @@
         android:text="Tambah koleksi"
         android:textSize="18sp"
         android:textStyle="bold"/>
-
 </RelativeLayout>

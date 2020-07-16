@@ -28,14 +28,12 @@
             android:layout_height="wrap_content"
             android:hint="Email"
             android:textSize="14sp"/>
-
         <EditText
             android:id="@+id/etPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
             android:textSize="14sp"/>
-
         <TextView
             android:id="@+id/tvSignUp"
             android:layout_width="wrap_content"
@@ -43,7 +41,6 @@
             android:layout_marginVertical="8dp"
             android:text="Belum punya akun? klik untuk mendaftar"
             android:textSize="14sp"/>
-
         <Button
             android:id="@+id/btnSignIn"
             android:layout_width="match_parent"
@@ -51,7 +48,5 @@
             android:text="SIGN IN"
             android:textSize="18sp"
             android:textStyle="bold"/>
-
     </LinearLayout>
-
 </RelativeLayout>
