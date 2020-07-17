@@ -15,6 +15,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class SignUpActivity : AppCompatActivity() {
+    // Global variabel
     private lateinit var mLoading: ProgressDialog
     private lateinit var mDatabase: DatabaseReference
     private lateinit var myPreferences: MySharedPreferences
@@ -33,46 +34,48 @@ class SignUpActivity : AppCompatActivity() {
         // OnClick text (Sudah punya akun? klik untuk masuk)
         tvSignIn.setOnClickListener {
             // To Intent (Pindah Activity)
-            val goSignIn = Intent(this@SignUpActivity, SignInActivity::class.java)
+            val goSignIn = Intent(
+                this@SignUpActivity, SignInActivity::class.java
+            )
             startActivity(goSignIn)
             finish() // To destroy last activity
         }
 
         // OnClick button SIGN UP
         btnSignUp.setOnClickListener {
-            // To get value from Edit Text
-            val mFirstName = etFirstName.text.toString()
-            val mLastName = etLastName.text.toString()
-            val mEmail = etEmail.text.toString()
-            val mPassword = etPassword.text.toString()
-
             // Menjalankan program pada 'validate()'
             // Jika form sudah terisi semua, maka program pada 'signUp()' akan di jalankan
-            if(validate()){
+            if (validate()) {
+                // To get value from Edit Text
+                val mFirstName = etFirstName.text.toString()
+                val mLastName = etLastName.text.toString()
+                val mEmail = etEmail.text.toString()
+                val mPassword = etPassword.text.toString()
+
                 signUp(mFirstName, mLastName, mEmail, mPassword)
             }
         }
 
     }
 
-    private fun validate(): Boolean{
+    private fun validate(): Boolean {
         // Cek apakah form sudah terisi atau belum
-        if(etFirstName.text.isEmpty()){
+        if (etFirstName.text.isEmpty()) {
             etFirstName.requestFocus()
             etFirstName.error = "Enter your First Name"
             return false
         }
-        if(etLastName.text.isEmpty()){
+        if (etLastName.text.isEmpty()) {
             etLastName.requestFocus()
             etLastName.error = "Enter your Last Name"
             return false
         }
-        if(etEmail.text.isEmpty()){
+        if (etEmail.text.isEmpty()) {
             etEmail.requestFocus()
             etEmail.error = "Enter your Email"
             return false
         }
-        if(etPassword.text.isEmpty()){
+        if (etPassword.text.isEmpty()) {
             etPassword.requestFocus()
             etPassword.error = "Enter your Password"
             return false
@@ -80,32 +83,42 @@ class SignUpActivity : AppCompatActivity() {
         return true
     }
 
-    private fun signUp(mFirstName: String, mLastName: String, mEmail: String, mPassword: String){
+    private fun signUp(
+        mFirstName: String, mLastName: String, mEmail: String, mPassword: String
+    ) {
         // Menampilkan Loading
         mLoading.show()
 
         // Cek apakah email sudah digunakan atau belum
         val cekEmail = mDatabase.orderByChild("email").equalTo(mEmail)
 
-        cekEmail.addListenerForSingleValueEvent(object: ValueEventListener{
+        cekEmail.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(error: DatabaseError) {
                 // Menghilangkan Loading
                 mLoading.dismiss()
-                Toast.makeText(this@SignUpActivity, "${error.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this@SignUpActivity,
+                    "${error.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
 
             override fun onDataChange(snapshot: DataSnapshot) {
-                if(snapshot.value == null){
+                if (snapshot.value == null) {
                     // Get Date Time Now
-                    val mCurrentTime = SimpleDateFormat("yyyyMMdd:HHmmss", Locale.getDefault()).format(Date())
+                    val mCurrentTime =
+                        SimpleDateFormat("yyyyMMdd:HHmmss", Locale.getDefault())
+                            .format(Date())
 
-                    val user = User(mCurrentTime, mFirstName, mLastName, mEmail, mPassword) // Mengisi variabel pada model User
+                    val user = User(
+                        mCurrentTime, mFirstName, mLastName, mEmail, mPassword
+                    ) // Mengisi variabel pada model User
                     mDatabase.child(mCurrentTime).setValue(user)
 
-                    // Menyimpan data bahwa user telah berhasil masuk
+                    // Menyimpan data ke shared preferences bahwa user telah berhasil masuk
                     myPreferences.setValue("user", "signIn")
 
-                    // Menyimpan data user yang sudah masuk
+                    // Menyimpan data user yang sudah masuk ke shared preferences
                     myPreferences.setValue("id", user.id)
                     myPreferences.setValue("firstname", user.firstName)
                     myPreferences.setValue("lastname", user.lastName)
@@ -113,7 +126,9 @@ class SignUpActivity : AppCompatActivity() {
                     myPreferences.setValue("password", user.password)
 
                     // Intent ke MainActivity
-                    val goMain = Intent(this@SignUpActivity, MainActivity::class.java)
+                    val goMain = Intent(
+                        this@SignUpActivity, MainActivity::class.java
+                    )
                     startActivity(goMain)
                     finish()
 
@@ -123,7 +138,11 @@ class SignUpActivity : AppCompatActivity() {
                 } else {
                     // Menghilangkan Loading
                     mLoading.dismiss()
-                    Toast.makeText(this@SignUpActivity, "Email sudah digunakan", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        this@SignUpActivity,
+                        "Email sudah digunakan",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
 
